@@ -12,7 +12,7 @@ abstract class AInstagramBulkMediaImporter extends AInstagramMediaImporter
     protected abstract function getType();
 
     public function import(){
-        $items = $this->instagramClient->getUserMedia('self');
+        $items = $this->instagramClient->getUserMedia('self', 1000);
         $result = [];
         do {
             foreach ($items->data as $item){

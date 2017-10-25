@@ -24,6 +24,8 @@ class FacebookPhotoAdapter implements MediaAdapterInterface
     public function transform(MediaFactoryMethodInterface $mediaFactoryMethod){
         $video = $mediaFactoryMethod->make();
         $video->setId($this->data['id']);
+        $video->setType('image');
+        $video->setSourceType('facebook');
         $video->setDescription(!empty($this->data['name']) ? $this->data['name'] : '');
         $video->setSourceURL($this->data['webp_images'][0]);
         $video->setThumbnailURL($this->data['webp_images'][count($this->data['webp_images'])-1]);

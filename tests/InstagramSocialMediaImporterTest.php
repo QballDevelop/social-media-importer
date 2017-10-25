@@ -3,7 +3,9 @@
 namespace tests;
 
 use Codenetix\SocialMediaImporter\Filters\MediaFilterByTags;
+use Codenetix\SocialMediaImporter\Importers\InstagramMediaByIdImporter;
 use Codenetix\SocialMediaImporter\Importers\InstagramPhotosImporter;
+use Codenetix\SocialMediaImporter\Importers\InstagramSingleMediaImporter;
 use Codenetix\SocialMediaImporter\Importers\InstagramVideosImporter;
 use Codenetix\SocialMediaImporter\Support\AuthContext;
 use PHPUnit\Framework\TestCase;
@@ -24,6 +26,14 @@ class InstagramSocialMediaImporterTest extends TestCase
         $tags = ['lol', 'kek', 'hi'];
         $importer = new InstagramPhotosImporter($this->getAuthContext());
         $result = (new MediaFilterByTags())->filter($importer->import(), $tags);
+
+        $this->assertNotEmpty($result);
+    }
+
+    public function testGetMediaByLink()
+    {
+        $importer = new InstagramSingleMediaImporter($this->getAuthContext());
+        $result = $importer->importByURL('https://www.instagram.com/p/BadwCbaj-Ct');
 
         $this->assertNotEmpty($result);
     }

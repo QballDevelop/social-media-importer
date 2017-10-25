@@ -8,7 +8,7 @@ use MetzWeb\Instagram\Instagram;
 /**
  * @author Andrey Vorobiov<andrew.sprw@gmail.com>
  */
-class InstagramVideosImporter extends AInstagramMediaImporter
+class InstagramVideosImporter extends AInstagramBulkMediaImporter
 {
     protected function getType()
     {

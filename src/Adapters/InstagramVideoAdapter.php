@@ -23,6 +23,8 @@ class InstagramVideoAdapter implements MediaAdapterInterface
     public function transform(MediaFactoryMethodInterface $mediaFactoryMethod){
         $video = $mediaFactoryMethod->make();
         $video->setId($this->data->id);
+        $video->setType('video');
+        $video->setSourceType('instagram');
         $video->setDescription(!empty($this->data->caption->text) ? $this->data->caption->text : '');
         $video->setSourceURL($this->data->videos->standard_resolution->url);
         $video->setThumbnailURL($this->data->images->low_resolution->url);

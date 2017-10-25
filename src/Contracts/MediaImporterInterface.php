@@ -10,5 +10,4 @@ interface MediaImporterInterface
     public function onProgress($callback);
     public function onResult($callback);
     public function onError($callback);
-    public function import();
 }

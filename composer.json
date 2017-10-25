@@ -10,7 +10,8 @@
     ],
     "require": {
         "facebook/graph-sdk": "^5.6",
-        "cosenary/instagram": "^2.3"
+        "cosenary/instagram": "^2.3",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "config": {
         "bin-dir": "bin"

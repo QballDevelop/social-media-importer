@@ -4,7 +4,6 @@ namespace Codenetix\SocialMediaImporter\Importers;
 use Codenetix\SocialMediaImporter\Contracts\AuthContextInterface;
 use Codenetix\SocialMediaImporter\Contracts\InstagramClientInterface;
 use Codenetix\SocialMediaImporter\Contracts\MediaFactoryMethodInterface;
-use Codenetix\SocialMediaImporter\FactoryMethods\InstagramMediaAdapterFactoryMethod;
 use MetzWeb\Instagram\Instagram;
 
 /**
@@ -12,7 +11,7 @@ use MetzWeb\Instagram\Instagram;
  */
 abstract class AInstagramMediaImporter extends AMediaImporter
 {
-    private $instagramClient;
+    protected $instagramClient;
 
     /**
      * AInstagramMediaImporter constructor.
@@ -35,22 +34,5 @@ abstract class AInstagramMediaImporter extends AMediaImporter
         }
 
         $this->instagramClient->setAccessToken($authContext->getAuthToken());
-    }
-
-    protected abstract function getType();
-
-    public function import(){
-        $items = $this->instagramClient->getUserMedia('self');
-        $result = [];
-        do {
-            foreach ($items->data as $item){
-                if($item->type != $this->getType()){
-                    continue;
-                }
-                array_push($result, (new InstagramMediaAdapterFactoryMethod())->make($this->getType(), $item)->transform($this->mediaFactoryMethod));
-            }
-        } while($items = $this->instagramClient->pagination($items));
-
-        return $result;
     }
 }

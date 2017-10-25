@@ -5,7 +5,7 @@ namespace Codenetix\SocialMediaImporter\Importers;
 /**
  * @author Andrey Vorobiov<andrew.sprw@gmail.com>
  */
-class FacebookVideosImporter extends AFacebookMediaImporter
+class FacebookVideosImporter extends AFacebookBulkMediaImporter
 {
 
     protected function getURL()

@@ -22,6 +22,28 @@ interface MediaInterface
     /**
      * @return string
      */
+    public function getSourceType();
+
+    /**
+     * @param string $sourceType
+     * @return Media
+     */
+    public function setSourceType($sourceType);
+
+    /**
+     * @return string
+     */
+    public function getType();
+
+    /**
+     * @param string $type
+     * @return Media
+     */
+    public function setType($type);
+
+    /**
+     * @return string
+     */
     public function getDescription();
 
     /**

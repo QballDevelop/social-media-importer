@@ -12,11 +12,7 @@ use Facebook\Facebook;
  */
 abstract class AFacebookMediaImporter extends AMediaImporter
 {
-    private $facebookClient;
-
-    protected abstract function getURL();
-
-    protected abstract function getType();
+    protected $facebookClient;
 
     /**
      * AFacebookMediaImporter constructor.
@@ -41,19 +37,5 @@ abstract class AFacebookMediaImporter extends AMediaImporter
 
     }
 
-    /**
-     * @return array
-     */
-    public function import(){
-        $edge = $this->facebookClient->get($this->getURL())->getGraphEdge();
-        $videos = [];
-        do {
-            foreach ($edge as $edgeItem){
-                array_push($videos, (new FacebookMediaAdapterFactoryMethod())->make($this->getType(), $edgeItem->asArray())->transform($this->mediaFactoryMethod));
-            }
-        } while($edge = $this->facebookClient->next($edge));
-
-        return $videos;
-    }
 
 }

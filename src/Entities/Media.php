@@ -15,6 +15,16 @@ class Media implements MediaInterface
     private $id;
 
     /**
+     * @var string $sourceType
+     */
+    private $sourceType;
+
+    /**
+     * @var string $type
+     */
+    private $type;
+
+    /**
      * @var string $description
      */
     private $description;
@@ -54,6 +64,42 @@ class Media implements MediaInterface
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceType()
+    {
+        return $this->sourceType;
+    }
+
+    /**
+     * @param string $sourceType
+     * @return Media
+     */
+    public function setSourceType($sourceType)
+    {
+        $this->sourceType = $sourceType;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return Media
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
         return $this;
     }
 

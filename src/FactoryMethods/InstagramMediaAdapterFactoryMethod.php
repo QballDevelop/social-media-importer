@@ -4,6 +4,7 @@ namespace Codenetix\SocialMediaImporter\FactoryMethods;
 use Codenetix\SocialMediaImporter\Adapters\InstagramPhotoAdapter;
 use Codenetix\SocialMediaImporter\Adapters\InstagramVideoAdapter;
 use Codenetix\SocialMediaImporter\Contracts\MediaAdapterInterface;
+use Codenetix\SocialMediaImporter\Exceptions\ImportException;
 
 /**
  * @author Andrey Vorobiov<andrew.sprw@gmail.com>
@@ -23,5 +24,7 @@ class InstagramMediaAdapterFactoryMethod
             case 'image':
                 return new InstagramPhotoAdapter($data);
         }
+
+        throw new ImportException("Unsupported media type " . $type);
     }
 }

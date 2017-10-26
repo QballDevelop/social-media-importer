@@ -9,7 +9,7 @@ class FacebookPhotosImporter extends AFacebookBulkMediaImporter
 {
     protected function getURL()
     {
-        return '/me/photos/uploaded?fields=name,webp_images,id';
+        return '/me/photos/uploaded?fields=name,images,id';
     }
 
     protected function getType()

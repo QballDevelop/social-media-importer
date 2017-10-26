@@ -1,6 +1,7 @@
 <?php
 
 namespace Codenetix\SocialMediaImporter\Importers;
+
 use Codenetix\SocialMediaImporter\FactoryMethods\InstagramMediaAdapterFactoryMethod;
 use Codenetix\SocialMediaImporter\Scrapers\InstagramScraper;
 

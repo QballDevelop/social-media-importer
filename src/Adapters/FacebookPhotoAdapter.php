@@ -27,8 +27,8 @@ class FacebookPhotoAdapter implements MediaAdapterInterface
         $video->setType('image');
         $video->setSourceType('facebook');
         $video->setDescription(!empty($this->data['name']) ? $this->data['name'] : '');
-        $video->setSourceURL($this->data['webp_images'][0]);
-        $video->setThumbnailURL($this->data['webp_images'][count($this->data['webp_images'])-1]);
+        $video->setSourceURL($this->data['images'][0]['source']);
+        $video->setThumbnailURL($this->data['images'][count($this->data['images'])-1]['source']);
         $video->setTags(TagsFromStringExtractor::extract($video->getDescription()));
         return $video;
     }

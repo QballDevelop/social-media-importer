@@ -34,7 +34,6 @@ class InstagramSocialMediaImporterTest extends TestCase
     {
         $importer = new InstagramSingleMediaImporter($this->getAuthContext());
         $result = $importer->importByURL('https://www.instagram.com/p/BadwCbaj-Ct');
-
         $this->assertNotEmpty($result);
     }
 

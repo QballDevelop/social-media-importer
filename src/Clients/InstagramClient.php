@@ -1,4 +1,4 @@
-<?php namespace Codenetix\SocialMediaImporter\Adapters;
+<?php namespace Codenetix\SocialMediaImporter\Clients;
 
 use Codenetix\SocialMediaImporter\Contracts\InstagramClientInterface;
 use MetzWeb\Instagram\Instagram;
@@ -8,5 +8,13 @@ use MetzWeb\Instagram\Instagram;
  */
 class InstagramClient extends Instagram implements InstagramClientInterface
 {
-
+    /**
+     * Get media by its id
+     *
+     * @param integer $id                   Instagram media ID
+     * @return mixed
+     */
+    public function getMedia($id) {
+        return $this->_makeCall('media/' . $id, true);
+    }
 }

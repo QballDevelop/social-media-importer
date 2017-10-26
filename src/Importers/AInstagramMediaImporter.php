@@ -1,10 +1,10 @@
 <?php
 
 namespace Codenetix\SocialMediaImporter\Importers;
+use Codenetix\SocialMediaImporter\Clients\InstagramClient;
 use Codenetix\SocialMediaImporter\Contracts\AuthContextInterface;
 use Codenetix\SocialMediaImporter\Contracts\InstagramClientInterface;
 use Codenetix\SocialMediaImporter\Contracts\MediaFactoryMethodInterface;
-use MetzWeb\Instagram\Instagram;
 
 /**
  * @author Andrey Vorobiov<andrew.sprw@gmail.com>
@@ -24,7 +24,7 @@ abstract class AInstagramMediaImporter extends AMediaImporter
         parent::__construct($mediaFactoryMethod);
 
         if(!$instagramClient){
-            $this->instagramClient = new Instagram(array(
+            $this->instagramClient = new InstagramClient(array(
                 'apiKey'      => $authContext->getAppId(),
                 'apiSecret'   => $authContext->getAppSecret(),
                 'apiCallback' => ''

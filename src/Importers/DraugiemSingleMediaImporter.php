@@ -60,7 +60,7 @@ class DraugiemSingleMediaImporter
             ];
         }
 
-        throw new ImportException();
+        throw new ImportException("Wrong media source is provided");
     }
 
     private function buildMediaObject($id, $description, $image, $url)

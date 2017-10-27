@@ -13,9 +13,10 @@ class InstagramMediaAdapterFactoryMethod
 {
 
     /**
-     * @param string$type
-     * @param array $data
-     * @return MediaAdapterInterface
+     * @param $type
+     * @param $data
+     * @return InstagramPhotoAdapter|InstagramVideoAdapter
+     * @throws ImportException
      */
     public function make($type, $data){
         switch ($type){

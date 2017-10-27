@@ -24,7 +24,7 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
             return;
         }
 
-        throw new WrongInputURLException();
+        throw new WrongInputURLException("Wrong Facebook URL is provided");
     }
 
     public function importByURL($url)
@@ -36,8 +36,8 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
         try {
             $item = $this->facebookClient->get($data['url'])->getDecodedBody();
         } catch(FacebookAuthenticationException $e){
-            throw new AuthenticationException("Wrong access token provided");
-        }catch(FacebookSDKException $e){
+            throw new AuthenticationException("Wrong access token is provided");
+        } catch(FacebookSDKException $e){
             throw new ImportException($e->getMessage());
         }
 
@@ -52,6 +52,6 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
             return ['url' => $result[1] . '?fields=description,source,id,thumbnails,embed_html', 'type' => 'video'];
         }
 
-        throw new ImportException();
+        throw new WrongInputURLException("Wrong Facebook URL is provided");
     }
 }

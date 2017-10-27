@@ -46,6 +46,15 @@ class FacebookSocialMediaImporterTest extends TestCase
         $this->assertNotEmpty($result);
     }
 
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\ImportException
+     */
+    public function testWrongAuthToken()
+    {
+        $importer = new FacebookSingleMediaImporter($this->getWrongAuthContext());
+        $importer->importByURL('https://www.facebook.com/rianru/videos/20156138991809271');
+    }
+
     public function testGetExternalVideoByLink()
     {
         $importer = new FacebookSingleMediaImporter($this->getAuthContext());
@@ -54,7 +63,47 @@ class FacebookSocialMediaImporterTest extends TestCase
         $this->assertNotEmpty($result);
     }
 
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\WrongInputURLException
+     */
+    public function testWrongParam()
+    {
+        $importer = new FacebookSingleMediaImporter($this->getAuthContext());
+        $importer->importByURL('https://www.facebook.com/videos/10156138991809271');
+    }
+
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\WrongInputURLException
+     */
+    public function testWrongParam2()
+    {
+        $importer = new FacebookSingleMediaImporter($this->getAuthContext());
+        $importer->importByURL('https://www.facebook.com/rianru/images/videos/10156138991809271/');
+    }
+
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\WrongInputURLException
+     */
+    public function testWrongParam3()
+    {
+        $importer = new FacebookSingleMediaImporter($this->getAuthContext());
+        $importer->importByURL('https://www.facebook.com/rianru/videos');
+    }
+
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\ImportException
+     */
+    public function testWrongID()
+    {
+        $importer = new FacebookSingleMediaImporter($this->getAuthContext());
+        $importer->importByURL('https://www.facebook.com/rianru/videos/1111ab');
+    }
+
+    private function getWrongAuthContext(){
+        return new AuthContext("1951790091754942", "2ff273ee11321b386a44e0e5d27cd42f", "AEAAbvJIsYXb4BAMnLh5va9MSAVgTAPWvXmcaJkVk38PZC31FEHCOZCyIdoS7wzL5j30rvEW4NIsowX1klsQcMf97ILl6F8vZB0WuZA07ZBN6pXnfrZBC49navJyaOrxDpKgCjjusytWXLJI9elxHRvrZCGBxfQ2wjisQRs0ZA0GQrZC5zfGxceFQDhqsUyf8PQxJvrwmPKgQAGRAZDZD");
+    }
+
     private function getAuthContext(){
-        return new AuthContext("1951790091754942", "2ff273ee11321b386a44e0e5d27cd42f", "EAAbvJIsYXb4BANFxRdah2N8eVxNnUYX4qBDhUVm4ioDEs35rxyLlKekwH9ISGzQ2fiLBZB3FRcIoxXEvHZBLc4mHxZAXw9ZBdxngHuBhBlZBC6ufU1d5CTkZAzVCLhTpnQhORHjSC3E5SGGbtPe0NdsyNNn7oYsqT29tTFWGerfkuVF6xUZCZAi7SakHZAfWejtvZABNVnycZBLRgZDZD");
+        return new AuthContext("1951790091754942", "2ff273ee11321b386a44e0e5d27cd42f", "EAAbvJIsYXb4BAMnLh5va9MSAVgTAPWvXmcaJkVk38PZC31FEHCOZCyIdoS7wzL5j30rvEW4NIsowX1klsQcMf97ILl6F8vZB0WuZA07ZBN6pXnfrZBC49navJyaOrxDpKgCjjusytWXLJI9elxHRvrZCGBxfQ2wjisQRs0ZA0GQrZC5zfGxceFQDhqsUyf8PQxJvrwmPKgQAGRAZDZD");
     }
 }

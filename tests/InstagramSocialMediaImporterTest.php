@@ -33,8 +33,26 @@ class InstagramSocialMediaImporterTest extends TestCase
     public function testGetMediaByLink()
     {
         $importer = new InstagramSingleMediaImporter($this->getAuthContext());
-        $result = $importer->importByURL('https://www.instagram.com/p/BadwCbaj-Ct');
+        $result = $importer->importByURL('http://instagram.com/p/BadwCbaj-Ct');
         $this->assertNotEmpty($result);
+    }
+
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\WrongInputURLException
+     */
+    public function testWrongParam()
+    {
+        $importer = new InstagramSingleMediaImporter($this->getAuthContext());
+        $importer->importByURL('https://www.instagram.com/wrong');
+    }
+
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\WrongInputURLException
+     */
+    public function testWrongParam2()
+    {
+        $importer = new InstagramSingleMediaImporter($this->getAuthContext());
+        $importer->importByURL('https://www.instagram.com/p/123/222');
     }
 
     private function getAuthContext(){

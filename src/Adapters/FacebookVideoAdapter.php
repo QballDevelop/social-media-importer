@@ -28,7 +28,7 @@ class FacebookVideoAdapter implements MediaAdapterInterface
         $video->setSourceType('facebook');
         $video->setDescription(!empty($this->data['description']) ? $this->data['description'] : '');
         $video->setSourceURL($this->data['source']);
-        $video->setThumbnailURL($this->data['thumbnails'][0]['uri']);
+        $video->setThumbnailURL($this->data['thumbnails']['data'][0]['uri']);
         $video->setSourceHTML($this->data['embed_html']);
         $video->setTags(TagsFromStringExtractor::extract($video->getDescription()));
         return $video;

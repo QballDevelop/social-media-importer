@@ -15,8 +15,8 @@ class InstagramSingleMediaImporter extends AInstagramMediaImporter
 {
     private function checkURL($url)
     {
-        if (!preg_match('/^https?:\/\/(?:www\.)?instagram\.com\/p\/[a-zA-Z0-9_-]+\/?$/', $url)) {
-            throw new WrongInputURLException();
+        if (!preg_match('/^https?:\/\/(?:www\.)?instagram\.com\/p\/[a-zA-Z0-9_-]+\/?/', $url)) {
+            throw new WrongInputURLException("Wrong URL format");
         }
     }
 

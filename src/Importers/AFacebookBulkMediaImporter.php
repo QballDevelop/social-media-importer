@@ -6,6 +6,7 @@ use Codenetix\SocialMediaImporter\Exceptions\AuthenticationException;
 use Codenetix\SocialMediaImporter\Exceptions\ImportException;
 use Codenetix\SocialMediaImporter\FactoryMethods\FacebookMediaAdapterFactoryMethod;
 use Facebook\Exceptions\FacebookAuthenticationException;
+use Facebook\Exceptions\FacebookAuthorizationException;
 use Facebook\Exceptions\FacebookSDKException;
 
 

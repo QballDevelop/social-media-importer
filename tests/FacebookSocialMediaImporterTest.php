@@ -38,6 +38,14 @@ class FacebookSocialMediaImporterTest extends TestCase
         $this->assertNotEmpty($result);
     }
 
+    public function testGetPhotoByLink2()
+    {
+        $importer = new FacebookSingleMediaImporter($this->getAuthContext());
+        $result = $importer->importByURL('https://www.facebook.com/Eckharttolle/photos/a.191110401216.164483.24590816216/10154346976666217/?type=3&theater');
+
+        $this->assertNotEmpty($result);
+    }
+
     public function testGetVideoByLink()
     {
         $importer = new FacebookSingleMediaImporter($this->getAuthContext());
@@ -99,11 +107,24 @@ class FacebookSocialMediaImporterTest extends TestCase
         $importer->importByURL('https://www.facebook.com/rianru/videos/1111ab');
     }
 
+    /**
+     * @expectedException Codenetix\SocialMediaImporter\Exceptions\ImportException
+     */
+    public function testOldAccessToken()
+    {
+        $importer = new FacebookSingleMediaImporter($this->getOldAuthContext());
+        $importer->importByURL('https://www.facebook.com/rianru/videos/1111ab');
+    }
+
+    private function getOldAuthContext(){
+        return new AuthContext("1951790091754942", "2ff273ee11321b386a44e0e5d27cd42f", "EAAbvJIsYXb4BAMnLh5va9MSAVgTAPWvXmcaJkVk38PZC31FEHCOZCyIdoS7wzL5j30rvEW4NIsowX1klsQcMf97ILl6F8vZB0WuZA07ZBN6pXnfrZBC49navJyaOrxDpKgCjjusytWXLJI9elxHRvrZCGBxfQ2wjisQRs0ZA0GQrZC5zfGxceFQDhqsUyf8PQxJvrwmPKgQAGRAZDZD");
+    }
+
     private function getWrongAuthContext(){
         return new AuthContext("1951790091754942", "2ff273ee11321b386a44e0e5d27cd42f", "AEAAbvJIsYXb4BAMnLh5va9MSAVgTAPWvXmcaJkVk38PZC31FEHCOZCyIdoS7wzL5j30rvEW4NIsowX1klsQcMf97ILl6F8vZB0WuZA07ZBN6pXnfrZBC49navJyaOrxDpKgCjjusytWXLJI9elxHRvrZCGBxfQ2wjisQRs0ZA0GQrZC5zfGxceFQDhqsUyf8PQxJvrwmPKgQAGRAZDZD");
     }
 
     private function getAuthContext(){
-        return new AuthContext("1951790091754942", "2ff273ee11321b386a44e0e5d27cd42f", "EAAbvJIsYXb4BAMnLh5va9MSAVgTAPWvXmcaJkVk38PZC31FEHCOZCyIdoS7wzL5j30rvEW4NIsowX1klsQcMf97ILl6F8vZB0WuZA07ZBN6pXnfrZBC49navJyaOrxDpKgCjjusytWXLJI9elxHRvrZCGBxfQ2wjisQRs0ZA0GQrZC5zfGxceFQDhqsUyf8PQxJvrwmPKgQAGRAZDZD");
+        return new AuthContext("1951790091754942", "2ff273ee11321b386a44e0e5d27cd42f", "EAAbvJIsYXb4BAJBAtkfLsrML7DI9izVus3U6TiUkoV7t3zZBuST97gA4qcGkvMZBdJ8egUuAb1mvaTlkWE2NoL1tBUiWBT9pg1Kr0e96gZAZCh3F7puxYct3z2VQfTmZBOtPtHQwsxCO1HrgZAUotod5YGeU6zxFQwTPd2sP4DCvOZBtHBIUZB9jAlDN44ZAKazsmYhZBiguijSgZDZD");
     }
 }

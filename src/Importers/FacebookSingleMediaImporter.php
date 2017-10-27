@@ -7,8 +7,6 @@ use Codenetix\SocialMediaImporter\Exceptions\ImportException;
 use Codenetix\SocialMediaImporter\Exceptions\WrongInputURLException;
 use Codenetix\SocialMediaImporter\FactoryMethods\FacebookMediaAdapterFactoryMethod;
 use Facebook\Exceptions\FacebookAuthenticationException;
-use Facebook\Exceptions\FacebookClientException;
-use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 
 /**
@@ -18,7 +16,6 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
 {
     private function checkURL($url)
     {
-        //https://www.facebook.com/vorobivka/videos/1179647665503148
         if (preg_match('/^https:\/\/(?:www\.)?facebook\.com\/photo\.php\?fbid=[0-9]+&?/', $url)) {
             return;
         }

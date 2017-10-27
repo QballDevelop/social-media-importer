@@ -20,6 +20,10 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
             return;
         }
 
+        if (preg_match('/^https:\/\/(?:www\.)?facebook\.com\/[\w]+\/photos\/[a-z\.0-9]+\/?\??/', $url)) {
+            return;
+        }
+
         if (preg_match('/^https:\/\/(?:www\.)?facebook\.com\/[\w]+\/videos\/[a-z\.0-9]+\/?\??/', $url)) {
             return;
         }
@@ -47,6 +51,8 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
     private function getRequestDataFromURL($url)
     {
         if (preg_match('#photo\\.php\\?fbid=([0-9]+)#', $url, $result)) {
+            return ['url' => $result[1] . '?fields=name,source,id,images', 'type' => 'image'];
+        } else if (preg_match('#photos\\/([a-z\.0-9]+)#', $url, $result)) {
             return ['url' => $result[1] . '?fields=name,source,id,images', 'type' => 'image'];
         } else if (preg_match('#videos\\/([a-z\.0-9]+)#', $url, $result)) {
             return ['url' => $result[1] . '?fields=description,source,id,thumbnails,embed_html', 'type' => 'video'];

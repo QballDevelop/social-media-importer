@@ -14,7 +14,7 @@ class DraugiemSingleMediaImporter extends ADraugiemMediaImporter
 
     private function checkURL($url)
     {
-        if (preg_match('/^https:\/\/(?:www)?\.draugiem\.lv\/(?:[\w]+\/)?gallery\/\?pid=([0-9]+)', $url)) {
+        if (preg_match('/^https:\/\/(?:www)?\.draugiem\.lv\/(?:[\w]+\/)?gallery\/\?pid=([0-9]+)/', $url)) {
             return;
         }
 
@@ -23,6 +23,8 @@ class DraugiemSingleMediaImporter extends ADraugiemMediaImporter
 
     public function importByURL($url)
     {
+        $this->checkURL($url);
+
         $id = $this->getIdFromURL($url);
         $item = $this->draugiemClient->apiCall('rasens/item', ['pid'=> $id]);
 

@@ -27,9 +27,23 @@ class DraugiemMediaAdapter implements MediaAdapterInterface
         $media->setType($this->data['type'] == 'picture' ? 'image' : 'video');
         $media->setSourceType($this->data['type']);
         $media->setDescription(!empty($this->data['description']) ? $this->data['description'] : '');
-        $media->setSourceURL($this->data['url']);
+        if($this->data['type'] == 'youtube'){
+            $media->setSourceURL($this->youtubeURLtoEmbed($this->data['url']));
+        } else {
+            $media->setSourceURL($this->data['url']);
+        }
         $media->setThumbnailURL($this->data['thumbnail']);
         $media->setTags(TagsFromStringExtractor::extract($media->getDescription()));
         return $media;
     }
+
+    private function youtubeURLtoEmbed($url){
+        preg_match(
+            '/[\\?\\&]v=([^\\?\\&]+)/',
+            $url,
+            $matches
+        );
+        return 'http://www.youtube.com/embed/'.$matches[1];
+    }
+
 }

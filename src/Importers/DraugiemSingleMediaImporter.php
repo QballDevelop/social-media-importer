@@ -3,6 +3,7 @@
 namespace Codenetix\SocialMediaImporter\Importers;
 
 use Codenetix\SocialMediaImporter\Adapters\DraugiemMediaAdapter;
+use Codenetix\SocialMediaImporter\Exceptions\WrongInputURLException;
 use Codenetix\SocialMediaImporter\FactoryMethods\MediaFactoryMethod;
 
 /**
@@ -10,6 +11,15 @@ use Codenetix\SocialMediaImporter\FactoryMethods\MediaFactoryMethod;
  */
 class DraugiemSingleMediaImporter extends ADraugiemMediaImporter
 {
+
+    private function checkURL($url)
+    {
+        if (preg_match('/^https:\/\/(?:www)?\.draugiem\.lv\/(?:[\w]+\/)?gallery\/\?pid=([0-9]+)', $url)) {
+            return;
+        }
+
+        throw new WrongInputURLException("Wrong Draugiem URL has been provided - ".$url);
+    }
 
     public function importByURL($url)
     {

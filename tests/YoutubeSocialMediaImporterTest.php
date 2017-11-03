@@ -2,13 +2,7 @@
 
 namespace tests;
 
-use Codenetix\SocialMediaImporter\Filters\MediaFilterByTags;
-use Codenetix\SocialMediaImporter\Importers\InstagramMediaByIdImporter;
-use Codenetix\SocialMediaImporter\Importers\InstagramPhotosImporter;
-use Codenetix\SocialMediaImporter\Importers\InstagramSingleMediaImporter;
-use Codenetix\SocialMediaImporter\Importers\InstagramVideosImporter;
 use Codenetix\SocialMediaImporter\Importers\YoutubeSingleMediaImporter;
-use Codenetix\SocialMediaImporter\Support\AuthContext;
 use PHPUnit\Framework\TestCase;
 
 class YoutubeSocialMediaImporterTest extends TestCase
@@ -24,6 +18,13 @@ class YoutubeSocialMediaImporterTest extends TestCase
     {
         $importer = new YoutubeSingleMediaImporter();
         $result = $importer->importByURL('https://www.youtube.com/embed/RVCTV8D_UaE');
+        $this->assertNotEmpty($result);
+    }
+
+    public function testGetMediaByLink3()
+    {
+        $importer = new YoutubeSingleMediaImporter();
+        $result = $importer->importByURL('https://youtu.be/0_qTxNIQy7I');
         $this->assertNotEmpty($result);
     }
 }

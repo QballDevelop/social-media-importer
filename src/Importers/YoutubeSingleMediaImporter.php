@@ -25,6 +25,10 @@ class YoutubeSingleMediaImporter extends AMediaImporter
             return $result[1];
         }
 
+        if (preg_match('/^https:\/\/(?:www\.)?youtu\.be\/([^\?\&]+)/', $url, $result)) {
+            return $result[1];
+        }
+
         throw new WrongInputURLException("Wrong Youtube URL has been provided - ".$url);
     }
 

@@ -25,7 +25,7 @@ class DraugiemSocialMediaImporterTest extends TestCase
     public function testImport2()
     {
         $importer = new DraugiemSingleMediaImporter($this->getAuthContext());
-        $result = $importer->importByURL('https://www.draugiem.lv/gallery/?pid=442953373');
+        $result = $importer->importByURL('https://www.draugiem.lv/mbcdntx/gallery/?pid=443100307');
 
         $this->assertNotEmpty($result);
         $this->assertNotEmpty($result->getId());

@@ -28,7 +28,7 @@ class YoutubeMediaAdapter implements MediaAdapterInterface
         $media->setSourceType('youtube');
         $media->setDescription($this->data->snippet->description);
         $media->setSourceURL("https://www.youtube.com/embed/".$this->data->id);
-        $media->setThumbnailURL($this->data->snippet->thumbnails->default->url);
+        $media->setThumbnailURL($this->data->snippet->thumbnails->standard->url);
         $media->setTags(TagsFromStringExtractor::extract($media->getDescription()));
         return $media;
     }

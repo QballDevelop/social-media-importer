@@ -37,7 +37,7 @@ class YoutubeSingleMediaImporter extends AMediaImporter
         $id = $this->checkURL($url);
 
         $client = new Client();
-        $response = $client->get("https://www.googleapis.com/youtube/v3/videos?id=".$id."&key=AIzaSyAD5ZP54MuysK4fvzam1Iz4VRiX98V6kpY&fields=items(id,snippet(description), snippet(thumbnails(default(url))))&part=snippet");
+        $response = $client->get("https://www.googleapis.com/youtube/v3/videos?id=".$id."&key=AIzaSyAD5ZP54MuysK4fvzam1Iz4VRiX98V6kpY&fields=items(id,snippet(description), snippet(thumbnails(standard(url))))&part=snippet");
         $data = json_decode($response->getBody());
 
         if(!empty($data->error)){

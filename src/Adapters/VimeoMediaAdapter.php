@@ -27,7 +27,8 @@ class VimeoMediaAdapter implements MediaAdapterInterface
         $media->setType('video');
         $media->setSourceType('vimeo');
         $media->setDescription($this->data->description);
-        $media->setSourceURL('');
+        $media->setSourceURL('https://vimeo.com'.$this->data->uri);
+        $media->setSourceHTML($this->data->html);
         $media->setThumbnailURL($this->data->thumbnail_url);
         $media->setTags(TagsFromStringExtractor::extract($media->getDescription()));
         return $media;

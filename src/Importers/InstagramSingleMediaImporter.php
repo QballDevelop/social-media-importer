@@ -34,6 +34,26 @@ class InstagramSingleMediaImporter extends AInstagramMediaImporter
             throw new ImportException($item->meta->error_message);
         }
 
+        $embedItemRaw = $this->curlGet('https://api.instagram.com/oembed/?url='.rawurlencode($url));
+        $embedItem = json_decode($embedItemRaw);
+
+        if(!is_null($embedItem)){
+            throw new RequestedDataNotFoundException("Requested media was not found");
+        }
+
+        $item->data->html = $embedItem->html;
+
         return (new InstagramMediaAdapterFactoryMethod())->make($item->data->type, $item->data)->transform($this->mediaFactoryMethod);
+    }
+
+    private function curlGet($url)
+    {
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        $return = curl_exec($curl);
+        curl_close($curl);
+        return $return;
     }
 }

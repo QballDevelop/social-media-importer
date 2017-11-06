@@ -37,7 +37,7 @@ class InstagramSingleMediaImporter extends AInstagramMediaImporter
         $embedItemRaw = $this->curlGet('https://api.instagram.com/oembed/?url='.rawurlencode($url));
         $embedItem = json_decode($embedItemRaw);
 
-        if(!is_null($embedItem)){
+        if(is_null($embedItem)){
             throw new RequestedDataNotFoundException("Requested media was not found");
         }
 

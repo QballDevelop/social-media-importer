@@ -29,7 +29,7 @@ class YoutubeSingleMediaImporter extends AMediaImporter
             return $result[1];
         }
 
-        throw new WrongInputURLException("Wrong Youtube URL has been provided - ".$url);
+        throw new WrongInputURLException("Wrong URL format");
     }
 
     public function importByURL($url)

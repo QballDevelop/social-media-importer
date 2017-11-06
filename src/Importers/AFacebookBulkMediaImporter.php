@@ -29,7 +29,7 @@ abstract class AFacebookBulkMediaImporter extends AFacebookMediaImporter
         try {
             $edge = $this->facebookClient->get($this->getURL())->getGraphEdge();
         } catch (FacebookAuthenticationException $e) {
-            throw new AuthenticationException("Wrong access token provided");
+            throw new AuthenticationException("Wrong access token is provided");
         } catch (FacebookSDKException $e) {
             throw new ImportException($e->getMessage());
         }

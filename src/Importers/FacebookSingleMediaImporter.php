@@ -28,7 +28,7 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
             return;
         }
 
-        throw new WrongInputURLException("Wrong Facebook URL has been provided - ".$url);
+        throw new WrongInputURLException("Wrong URL format");
     }
 
     public function importByURL($url)
@@ -58,6 +58,6 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
             return ['url' => $result[1] . '?fields=description,source,id,thumbnails,embed_html', 'type' => 'video'];
         }
 
-        throw new WrongInputURLException("Wrong Facebook URL has been provided - ".$url);
+        throw new WrongInputURLException("Wrong URL format");
     }
 }

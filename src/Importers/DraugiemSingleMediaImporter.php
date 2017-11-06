@@ -18,7 +18,7 @@ class DraugiemSingleMediaImporter extends ADraugiemMediaImporter
             return;
         }
 
-        throw new WrongInputURLException("Wrong Draugiem URL has been provided - ".$url);
+        throw new WrongInputURLException("Wrong URL format");
     }
 
     public function importByURL($url)

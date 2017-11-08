@@ -25,7 +25,7 @@ class DraugiemMediaAdapter implements MediaAdapterInterface
         $media = $mediaFactoryMethod->make();
         $media->setId($this->data['id']);
         $media->setType($this->data['type'] == 'picture' ? 'image' : 'video');
-        $media->setSourceType($this->data['type']);
+        $media->setSourceType($this->data['type'] == 'video' || $this->data['type'] == 'picture' || $this->data['type'] == 'gif' ? 'draugiem' : $this->data['type']);
         $media->setDescription(!empty($this->data['description']) ? $this->data['description'] : '');
         if($this->data['type'] == 'youtube'){
             $media->setSourceURL($this->youtubeURLtoEmbed($this->data['url']));

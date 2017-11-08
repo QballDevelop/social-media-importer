@@ -10,8 +10,10 @@ class YoutubeSocialMediaImporterTest extends TestCase
     public function testGetMediaByLink()
     {
         $importer = new YoutubeSingleMediaImporter();
-        $result = $importer->importByURL('https://www.youtube.com/watch?v=TbLXpaTHbig');
+        $result = $importer->importByURL('https://youtu.be/K6ZBsYT8vxc');
         $this->assertNotEmpty($result);
+        var_dump($result);
+        exit();
     }
 
     public function testGetMediaByLink2()

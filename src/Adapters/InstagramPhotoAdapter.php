@@ -28,7 +28,7 @@ class InstagramPhotoAdapter implements MediaAdapterInterface
         $video->setDescription(!empty($this->data->caption->text) ? $this->data->caption->text : '');
         $video->setSourceURL($this->data->images->standard_resolution->url);
         $video->setThumbnailURL($this->data->images->low_resolution->url);
-        $video->setSourceHTML($this->data->html);
+        $video->setSourceHTML($this->data->link);
         $video->setTags($this->data->tags);
         return $video;
     }

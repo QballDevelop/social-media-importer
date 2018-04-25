@@ -14,6 +14,8 @@ abstract class AFacebookMediaImporter extends AMediaImporter
 {
     protected $facebookClient;
 
+    protected $providerUserId;
+
     /**
      * AFacebookMediaImporter constructor.
      * @param AuthContextInterface $authContext
@@ -34,6 +36,8 @@ abstract class AFacebookMediaImporter extends AMediaImporter
         } else {
             $this->facebookClient = $facebookClient;
         }
+
+        $this->providerUserId = $authContext->getProviderUserId();
 
     }
 

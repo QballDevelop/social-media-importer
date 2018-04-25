@@ -16,17 +16,22 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
 {
     private function checkURL($url)
     {
-        if (preg_match('/^https:\/\/(?:www\.)?facebook\.com\/photo\.php\?fbid=[0-9]+&?/', $url)) {
+        if (preg_match('/^[http|https:\/\/(?:www\.)?facebook\.com\/photo\.php\?fbid=[0-9]+&?/', $url)) {
             return;
         }
 
-        if (preg_match('/^https:\/\/(?:www\.)?facebook\.com\/[\w]+\/photos\/(?:[a-z\.0-9]+\/)?([0-9]+)\/?\??/', $url)) {
+        if (preg_match('/^(http|https):\/\/(?:www\.)?facebook\.com\/[a-zA-Z]+\W?[a-zA-Z]+\/photos\/(?:[a-z\.0-9]+\/)?([0-9]+)\/?\??/', $url)) {
             return;
         }
 
-        if (preg_match('/^https:\/\/(?:www\.)?facebook\.com\/[\w]+\/videos\/(?:[a-z\.0-9]+\/)?([0-9]+)\/?\??/', $url)) {
+        if (preg_match('/^(http|https):\/\/(?:www\.)?facebook\.com\/[a-zA-Z]+\W?[a-zA-Z]+\/videos\/(?:[a-z\.0-9]+\/)?([0-9]+)\/?\??/', $url)) {
             return;
         }
+
+        if (preg_match('/^(http|https):\/\/(?:www\.)?facebook\.com\/[a-zA-Z]+\W?[a-zA-Z]+\/posts\/(?:[a-z\.0-9]+\/)?([0-9]+)\/?\??/', $url)) {
+            return;
+        }  
+
 
         throw new WrongInputURLException("Wrong URL format");
     }
@@ -50,12 +55,15 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
 
     private function getRequestDataFromURL($url)
     {
+
         if (preg_match('#photo\.php\?fbid=([0-9]+)#', $url, $result)) {
             return ['url' => $result[1] . '?fields=name,source,id,images', 'type' => 'image'];
         } else if (preg_match('#photos\/(?:[a-z\.0-9]+\/)?([0-9]+)#', $url, $result)) {
             return ['url' => $result[1] . '?fields=name,source,id,images', 'type' => 'image'];
         } else if (preg_match('#videos\/(?:[a-z\.0-9]+\/)?([0-9]+)#', $url, $result)) {
             return ['url' => $result[1] . '?fields=description,source,id,thumbnails,embed_html', 'type' => 'video'];
+        } else if (preg_match('#posts\/(?:[a-z\.0-9]+\/)?([0-9]+)#', $url, $result)) {
+            return ['url' => $this->providerUserId .'_'. $result[1] . '?fields=name,source,id,link,message,description,full_picture,picture,place', 'type' => 'post'];
         }
 
         throw new WrongInputURLException("Wrong URL format");

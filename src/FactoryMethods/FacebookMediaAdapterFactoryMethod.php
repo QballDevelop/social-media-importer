@@ -1,6 +1,7 @@
 <?php
 namespace Codenetix\SocialMediaImporter\FactoryMethods;
 
+use Codenetix\SocialMediaImporter\Adapters\FacebookPostAdapter;
 use Codenetix\SocialMediaImporter\Adapters\FacebookPhotoAdapter;
 use Codenetix\SocialMediaImporter\Adapters\FacebookVideoAdapter;
 use Codenetix\SocialMediaImporter\Contracts\MediaAdapterInterface;
@@ -24,6 +25,8 @@ class FacebookMediaAdapterFactoryMethod
                 return new FacebookVideoAdapter($data);
             case 'image':
                 return new FacebookPhotoAdapter($data);
+            case 'post':
+                return new FacebookPostAdapter($data);
         }
 
         throw new ImportException("Unsupported media type " . $type);

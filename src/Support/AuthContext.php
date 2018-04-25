@@ -24,16 +24,23 @@ class AuthContext implements AuthContextInterface
     private $appSecret;
 
     /**
+     * @var string $providerUserId
+     */
+    private $providerUserId;
+    
+    /**
      * AuthContext constructor.
      * @param string $authToken
      * @param string $appId
      * @param string $appSecret
+     * @param string $providerUserId
      */
-    public function __construct($appId, $appSecret, $authToken)
+    public function __construct($appId, $appSecret, $authToken, $providerUserId = null)
     {
         $this->authToken = $authToken;
         $this->appId = $appId;
         $this->appSecret = $appSecret;
+        $this->providerUserId = $providerUserId;
     }
 
     /**
@@ -55,5 +62,12 @@ class AuthContext implements AuthContextInterface
      */
     public function getAppSecret(){
         return $this->appSecret;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProviderUserId(){
+        return $this->providerUserId;
     }
 }

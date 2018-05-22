@@ -23,12 +23,15 @@ class YoutubeMediaAdapter implements MediaAdapterInterface
      */
     public function transform(MediaFactoryMethodInterface $mediaFactoryMethod){
         $media = $mediaFactoryMethod->make();
+
         $media->setId($this->data->id);
         $media->setType('video');
         $media->setSourceType('youtube');
         $media->setDescription($this->data->snippet->description);
         $media->setSourceURL("https://www.youtube.com/embed/".$this->data->id);
-        $media->setThumbnailURL($this->data->snippet->thumbnails->standard->url);
+        if(isset($this->data->snippet->thumbnails) && $this->data->snippet->thumbnails) {
+            $media->setThumbnailURL($this->data->snippet->thumbnails->standard->url);
+        }
         $media->setTags(TagsFromStringExtractor::extract($media->getDescription()));
         return $media;
     }

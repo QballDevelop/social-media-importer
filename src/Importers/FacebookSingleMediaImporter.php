@@ -63,7 +63,8 @@ class FacebookSingleMediaImporter extends AFacebookMediaImporter
         } else if (preg_match('#videos\/(?:[a-z\.0-9]+\/)?([0-9]+)#', $url, $result)) {
             return ['url' => $result[1] . '?fields=description,source,id,thumbnails,embed_html', 'type' => 'video'];
         } else if (preg_match('#posts\/(?:[a-z\.0-9]+\/)?([0-9]+)#', $url, $result)) {
-            return ['url' => $this->providerUserId .'_'. $result[1] . '?fields=name,source,id,link,message,description,full_picture,picture,place', 'type' => 'post'];
+            //var_dump('asf',$result[1],  $this->providerUserId ); die();
+            return ['url' => $this->providerUserId .'_'. $result[1] . '?fields=name', 'type' => 'post'];
         }
 
         throw new WrongInputURLException("Wrong URL format");
